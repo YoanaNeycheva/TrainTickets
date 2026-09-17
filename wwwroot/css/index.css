@@ -1,0 +1,174 @@
+﻿.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* EMPTY STATE */
+.empty-state {
+    background: white;
+    padding: 1.5rem;
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 4px;
+}
+
+/* Primary button */
+.btn-primary-custom {
+    background: var(--accent1-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+    .btn-primary-custom:hover {
+        background: var(--secondary-color);
+    }
+
+/* Table wrapper */
+.custom-table-wrapper {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* Table */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .custom-table thead {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        padding: 16px 12px;
+        text-align: left;
+    }
+
+    .custom-table th {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .custom-table td {
+        font-size: 17px;
+    }
+
+    .custom-table tbody tr {
+        border-bottom: 1px solid var(--background-color);
+        transition: background 0.3s ease;
+    }
+
+        .custom-table tbody tr:hover {
+            background: var(--accent2-color);
+        }
+
+/* Price */
+.price {
+    font-weight: 600;
+    color: var(--accent1-color);
+}
+
+.train-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.train-fast {
+    color: #02b87e; /* зелено - бърз влак */
+    font-size: 18px;
+}
+
+.train-passenger {
+    color: #2E519D; /* синьо - пътнически */
+    font-size: 18px;
+}
+
+/* Actions */
+.actions {
+    justify-content: flex-end;
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+    .action-btn.edit {
+        background: var(--secondary-color);
+        color: white;
+    }
+
+    .action-btn.disabled {
+        pointer-events: none; /* disables clicking */
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .action-btn.details {
+        background: var(--accent1-color);
+        color: white;
+    }
+
+    .action-btn.delete {
+        background: #b33939;
+        color: white;
+    }
+
+    .action-btn:hover {
+        opacity: 0.8;
+    }
+
+/* BADGES */
+.badge-success {
+    background-color: #2e7d32;
+    color: white;
+    padding: 0.35rem 0.6rem;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.badge-danger {
+    background-color: #b71c1c;
+    color: white;
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.search-card {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+.search-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 1rem;
+    align-items: end;
+}
+
+    .search-grid label {
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+    }
+
+.search-actions {
+    display: flex;
+    align-items: flex-end;
+}

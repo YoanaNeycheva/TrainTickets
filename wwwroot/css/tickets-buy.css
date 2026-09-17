@@ -1,0 +1,54 @@
+﻿.buy-card {
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* TRIP INFO */
+.trip-info {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+    .trip-info .route {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .trip-info .times {
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+/* FORM */
+.buy-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.price-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.total-price {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+}
+
+/* ACTIONS */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}

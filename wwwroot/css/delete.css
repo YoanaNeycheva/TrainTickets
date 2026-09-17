@@ -1,0 +1,79 @@
+﻿.delete-card {
+    max-width: 650px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 14px;
+    padding: 2.5rem;
+    box-shadow: 0 12px 30px rgba(15, 26, 43, 0.15);
+}
+
+.delete-warning {
+    color: #b33939;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+/* DETAILS */
+.delete-details {
+    border-top: 1px solid var(--background-color);
+    border-bottom: 1px solid var(--background-color);
+    padding: 20px 4px;
+    margin-bottom: 2rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 17px;
+}
+
+    .detail-row .label {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .detail-row .value {
+        color: var(--text-color);
+    }
+
+    .detail-row.price .value {
+        font-weight: 600;
+        color: var(--accent1-color);
+    }
+
+/* ACTIONS */
+.delete-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.btn-danger {
+    background: #b33939;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 10px;
+    border: none;
+    font-size: 17px;
+    font-weight: 700;
+    transition: 0.3s ease;
+}
+
+    .btn-danger:hover {
+        opacity: 0.85;
+    }
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.3s ease;
+}
+
+    .btn-secondary:hover {
+        opacity: 0.85;
+    }

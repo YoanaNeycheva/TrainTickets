@@ -1,0 +1,99 @@
+﻿/* Page background */
+.profile-page {
+    min-height: 80vh;
+    padding: 20px 20px;
+}
+
+/* Container */
+.profile-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Header */
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+    .profile-header h1 {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .profile-header p {
+        color: var(--secondary-color);
+        font-size: 18px;
+    }
+
+/* Card */
+.profile-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px 50px;
+    box-shadow: 0 20px 50px rgba(15, 26, 43, 0.12);
+    transition: transform 0.3s ease;
+}
+
+
+/* Grid layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+/* Form controls */
+.form-group label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #d5dbe7;
+    transition: all 0.3s ease;
+    font-size: 15px;
+}
+
+    .form-control:focus {
+        border-color: var(--accent1-color);
+        box-shadow: 0 0 0 3px rgba(46, 81, 157, 0.15);
+        outline: none;
+    }
+
+/* Validation */
+.validation-summary,
+.form-group span {
+    color: #c0392b;
+    font-size: 13px;
+}
+
+/* Button */
+.profile-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btn-save {
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+    .btn-save:hover {
+        background: var(--accent1-color);
+    }
