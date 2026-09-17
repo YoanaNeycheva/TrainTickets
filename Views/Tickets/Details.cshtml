@@ -1,0 +1,84 @@
+﻿@model TrainTickets.Models.Ticket
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+
+    <h1 class="page-title text-center mb-4">Детайли за билета</h1>
+
+    <div class="details-card">
+
+        <!-- ПРЕВОЗ -->
+        <div class="details-section">
+            <h4 class="details-title">Информация за превоза</h4>
+            <dl class="details-list">
+                <div>
+                    <dt>Влак</dt>
+                    <dd>@Model.Trip.Train.Name</dd>
+                </div>
+                <div>
+                    <dt>Маршрут</dt>
+                    <dd>@Model.Trip.StartStation.Name → @Model.Trip.EndStation.Name</dd>
+                </div>
+                <div>
+                    <dt>Тръгване</dt>
+                    <dd>@Model.Trip.DepartureTime.ToString("dd.MM.yyyy г. HH:mm")</dd>
+                </div>
+                <div>
+                    <dt>Пристигане</dt>
+                    <dd>@Model.Trip.ArrivalTime.ToString("dd.MM.yyyy г. HH:mm")</dd>
+                </div>
+            </dl>
+        </div>
+
+        <!-- КУПУВАЧ -->
+        <div class="details-section">
+            <h4 class="details-title">Информация за купувача</h4>
+            <dl class="details-list">
+                <div>
+                    <dt>Три имена</dt>
+                    <dd>@Model.User.FirstName @Model.User.MiddleName @Model.User.LastName</dd>
+                </div>
+                <div>
+                    <dt>Телефон</dt>
+                    <dd>
+                        @Model.User.PhoneNumber
+                    </dd>
+                </div>
+            </dl>
+        </div>
+
+        <!-- ПОКУПКА -->
+        <div class="details-section">
+            <h4 class="details-title">Информация за покупката</h4>
+            <dl class="details-list">
+                <div>
+                    <dt>Цена на билет</dt>
+                    <dd>@Model.Trip.Price.ToString("F2") €</dd>
+                </div>
+                <div>
+                    <dt>Брой билети</dt>
+                    <dd>@Model.Quantity</dd>
+                </div>
+                <div>
+                    <dt>Дата на покупка</dt>
+                    <dd>@Model.PurchaseDate.ToString("dd.MM.yyyy г. HH:mm")</dd>
+                </div>
+                <div>
+                    <dt>Обща цена</dt>
+                    <dd class="price">@((Model.Trip.Price * Model.Quantity).ToString("F2")) €</dd>
+                </div>
+            </dl>
+        </div>
+
+        <div class="details-actions">
+            <a asp-action="MyTickets" class="btn btn-secondary">
+                ← Назад към моите билети
+            </a>
+        </div>
+
+    </div>
+</div>

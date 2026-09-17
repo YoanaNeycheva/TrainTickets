@@ -1,0 +1,89 @@
+﻿@page
+@model RegisterModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+}
+
+<div class="auth-page fade-in">
+    <div class="auth-card">
+
+        <h1 class="auth-title">Регистрация</h1>
+        <p class="auth-subtitle">
+            Създайте нов профил
+        </p>
+
+        <form id="registerForm"
+              asp-route-returnUrl="@Model.ReturnUrl"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger mb-3"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Input.FirstName">Име*</label>
+                <input asp-for="Input.FirstName"
+                       class="form-control"
+                       autocomplete="given-name" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Input.MiddleName">Презиме</label>
+                <input asp-for="Input.MiddleName"
+                       class="form-control"
+                       autocomplete="additional-name" />
+                <span asp-validation-for="Input.MiddleName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Input.LastName">Фамилия</label>
+                <input asp-for="Input.LastName"
+                       class="form-control"
+                       autocomplete="family-name" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Input.Email">Имейл*</label>
+                <input asp-for="Input.Email"
+                       class="form-control"
+                       autocomplete="username" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Input.Password">Парола*</label>
+                <input asp-for="Input.Password"
+                       class="form-control"
+                       autocomplete="new-password" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Input.ConfirmPassword">Повтори паролата*</label>
+                <input asp-for="Input.ConfirmPassword"
+                       class="form-control"
+                       autocomplete="new-password" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">
+                <span class="login-text">Регистрация</span>
+            </button>
+
+            <div class="auth-links">
+                <a asp-page="./Login"
+                   asp-route-returnUrl="@Model.ReturnUrl">
+                    Вече имате акаунт? Вход
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

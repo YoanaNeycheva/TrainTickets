@@ -1,0 +1,53 @@
+﻿@using TrainTickets.Enums
+@model TrainTickets.Models.Train
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/create-or-edit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+    <h1 class="page-title text-center mb-4">Редактиране на влак</h1>
+
+    <div class="form-card">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger pb-1"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-grid">
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label">Име на влак</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Type">Тип влак</label>
+                    <select asp-for="Type" class="form-control"
+                            asp-items="ViewBag.TrainTypes">
+                        <option value="">-- Изберете тип --</option>
+                    </select>
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Capacity" class="control-label">Брой места</label>
+                    <input asp-for="Capacity" class="form-control" />
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary mt-2">Редактирай</button>
+            </div>
+        </form>
+    </div>
+
+<div class="container w-75 mt-3 p-0 actions">
+        <a asp-action="Index" class="action-secondary">
+            ← Обратно
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

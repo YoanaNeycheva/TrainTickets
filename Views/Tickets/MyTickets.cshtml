@@ -1,0 +1,68 @@
+﻿@model IEnumerable<TrainTickets.Models.Ticket>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+    <link rel="stylesheet" href="~/css/animations.css" />
+}
+
+<div class="page-container fade-in">
+    <h1 class="page-title">Моите билети</h1>
+    <p class="page-subtitle">Преглед на всички закупени от Вас билети</p>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            Няма никакви закупени билети.
+        </div>
+    }
+    else
+    {
+        <div class="custom-table-wrapper">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Влак</th>
+                        <th>Маршрут</th>
+                        <th>Отпътуване</th>
+                        <th>Пристигане</th>
+                        <th>Брой</th>
+                        <th>Закупено на</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ticket in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold train-name">
+
+                                @if (ticket.Trip.Train.Type == TrainTickets.Enums.TrainType.Fast)
+                                {
+                                    <i class="fa-solid fa-train train-fast"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-solid fa-train train-passenger"></i>
+                                }
+
+                                @ticket.Trip.Train.Name
+                            </td>
+                            <td>@ticket.Trip.StartStation.Name → @ticket.Trip.EndStation.Name</td>
+                            <td>@ticket.Trip.DepartureTime.ToString("dd.MM.yyyy г. HH:mm")</td>
+                            <td>@ticket.Trip.ArrivalTime.ToString("dd.MM.yyyy г. HH:mm")</td>
+                            <td>@ticket.Quantity</td>
+                            <td>@ticket.PurchaseDate.ToString("dd.MM.yyyy г. HH:mm")</td>
+                            <td>
+                                <a asp-action="Details"
+                                   asp-route-id="@ticket.Id"
+                                   class="action-btn details">
+                                    Детайли
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -1,0 +1,84 @@
+﻿@using TrainTickets.Models.ViewModels
+@model TripViewModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/create-or-edit.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+    <h1 class="page-title text-center mb-4">Редактиране на превоза</h1>
+
+    @* @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary()
+            </div>
+        } *@
+    <div class="form-card">
+        <form asp-action="Edit" asp-controller="Trips" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger pb-1"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label asp-for="TrainId">Влак</label>
+                    <select asp-for="TrainId" class="form-control" asp-items="Model.Trains">
+                        <option value="">-- Изберете влак --</option>
+                    </select>
+                    <span asp-validation-for="TrainId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="StartStationId">Начална гара</label>
+                    <select asp-for="StartStationId" class="form-control" asp-items="Model.Stations">
+                        <option value="">-- Начална гара --</option>
+                    </select>
+                    <span asp-validation-for="StartStationId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="EndStationId">Крайна гара</label>
+                    <select asp-for="EndStationId" class="form-control" asp-items="Model.Stations">
+                        <option value="">-- Крайна гара --</option>
+                    </select>
+                    <span asp-validation-for="EndStationId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DepartureTime">Време на отпътуване</label>
+                    <input asp-for="DepartureTime" class="form-control"
+                           type="datetime-local" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+                    <span asp-validation-for="DepartureTime" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ArrivalTime">Време на пристигане</label>
+                    <input asp-for="ArrivalTime" class="form-control"
+                           type="datetime-local" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+                    <span asp-validation-for="ArrivalTime" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price">Цена (€)</label>
+                    <input asp-for="Price" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary mt-2">Редактирай</button>
+            </div>
+        </form>
+    </div>
+    <div class="container w-75 mt-3 p-0 actions">
+        <a asp-action="Index" class="action-secondary">
+            ← Обратно
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

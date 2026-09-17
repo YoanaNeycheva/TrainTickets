@@ -1,0 +1,78 @@
+﻿@model TrainTickets.Models.Trip
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/delete.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+
+    <h1 class="page-title text-center mb-4">Изтриване</h1>
+
+    <div class="delete-card">
+
+        <h5 class="delete-warning">
+            ⚠️ Сигурни ли сте, че искате да изтриете този превоз?
+            Това действие е необратимо.
+        </h5>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary()
+            </div>
+        }
+
+        <div class="delete-details">
+
+            <div class="detail-row">
+                <span class="label">Влак</span>
+                <span class="value">@Model.Train.Name</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Начална гара</span>
+                <span class="value">@Model.StartStation.City</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Крайна гара</span>
+                <span class="value">@Model.EndStation.City</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Отпътуване</span>
+                <span class="value">
+                    @Model.DepartureTime.ToString("dd.MM.yyyy HH:mm")
+                </span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Пристигане</span>
+                <span class="value">
+                    @Model.ArrivalTime.ToString("dd.MM.yyyy HH:mm")
+                </span>
+            </div>
+
+            <div class="detail-row price">
+                <span class="label">Цена</span>
+                <span class="value">@Model.Price.ToString("F2") €</span>
+            </div>
+
+        </div>
+
+        <form asp-action="Delete" class="delete-actions">
+            <input type="hidden" asp-for="Id" />
+
+            <a asp-action="Index" class="btn-secondary">
+                ← Обратно
+            </a>
+
+            <button type="submit" class="btn-danger">
+                Изтрий
+            </button>
+        </form>
+
+    </div>
+
+</div>

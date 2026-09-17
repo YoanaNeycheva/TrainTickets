@@ -1,0 +1,106 @@
+﻿@model TrainTickets.Models.ViewModels.TicketSearchViewModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+
+    <h1 class="page-title">Билети</h1>
+    <p class="page-subtitle">Изберете и купете билети за вашето пътуване</p>
+
+    <form method="get" class="search-card">
+        <div class="search-grid">
+            <div>
+                <label>Начална гара</label>
+                <select asp-for="StartStationId"
+                        asp-items="Model.Stations"
+                        class="form-select">
+                    <option value="">-- всички --</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Крайна гара</label>
+                <select asp-for="EndStationId"
+                        asp-items="Model.Stations"
+                        class="form-select">
+                    <option value="">-- всички --</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Дата на отпътуване</label>
+                <input asp-for="Date"
+                       type="date"
+                       class="form-control" />
+            </div>
+
+            <div class="search-actions">
+                <button type="submit" class="btn btn-primary">
+                    Търси
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div class="custom-table-wrapper">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Влак</th>
+                    <th>Маршрут</th>
+                    <th>Отпътуване</th>
+                    <th>Пристигане</th>
+                    <th>Свободни места</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var trip in Model.Trips)
+                {
+                    <tr>
+                        <td class="fw-semibold train-name">
+
+                            @if (trip.TrainType == TrainTickets.Enums.TrainType.Fast)
+                            {
+                                <i class="fa-solid fa-train train-fast"></i>
+                            }
+                            else
+                            {
+                                <i class="fa-solid fa-train train-passenger"></i>
+                            }
+
+                            @trip.TrainName
+                        </td>
+                        <td>@trip.StartStation → @trip.EndStation</td>
+                        <td>@trip.DepartureTime.ToString("dd.MM.yyyy г. HH:mm")</td>
+                        <td>@trip.ArrivalTime.ToString("dd.MM.yyyy г. HH:mm")</td>
+                        <td>
+                            @if (trip.FreeSeats > 0)
+                            {
+                                <span class="badge badge-success">@trip.FreeSeats</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">Изчерпани</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            @if (User.Identity.IsAuthenticated && trip.FreeSeats > 0)
+                            {
+                                <a asp-action="Buy"
+                                   asp-route-tripId="@trip.Id"
+                                   class="action-btn details">
+                                    Купи билет
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

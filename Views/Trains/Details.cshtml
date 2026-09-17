@@ -1,0 +1,76 @@
+﻿@model TrainTickets.Models.Train
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+        <h1 class="page-title">Детайли за влака</h1>
+        <p class="page-subtitle">Влак @Model.Name</p>
+
+    <div class="details-card">
+        <h4 class="details-title">Информация за влака</h4>
+        <dl class="details-list">
+            <div>
+                <dt>Име на влак</dt>
+                <dd>@Html.DisplayFor(model => model.Name)</dd>
+            </div>
+            <div>
+                <dt>Тип</dt>
+                <dd>@Html.DisplayFor(model => model.Type)</dd>
+            </div>
+            <div>
+                <dt>Брой места</dt>
+                <dd>@Html.DisplayFor(model => model.Capacity)</dd>
+            </div>
+        </dl>
+    </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="tickets-section mt-5">
+            <h3 class="page-title">Превози с този влак</h3>
+
+            @if (!Model.Trips.Any())
+            {
+                <p class="empty-state">Няма създадени превози за този влак.</p>
+            }
+            else
+            {
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Начална гара</th>
+                                <th>Крайна гара</th>
+                                <th>Тръгване</th>
+                                <th>Пристигане</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var trip in Model.Trips)
+                            {
+                                <tr>
+                                    <td>@trip.StartStation.Name</td>
+                                    <td>@trip.EndStation.Name</td>
+                                    <td>@trip.DepartureTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td>@trip.ArrivalTime.ToString("dd.MM.yyyy HH:mm")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+    <div class="actions mt-3">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="action-btn details">
+            Редактирай
+        </a>
+        <a asp-action="Index" class="action-btn edit">
+            Обратно
+        </a>
+    </div>
+</div>

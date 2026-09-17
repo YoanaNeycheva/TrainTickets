@@ -1,0 +1,106 @@
+﻿@model TrainTickets.Models.Trip
+
+<link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+
+<div class="page-container fade-in">
+
+    <div class="trip-header">
+        <h1 class="page-title">Подробности за превоза</h1>
+        <p class="page-subtitle">
+            @Model.StartStation.City → @Model.EndStation.City
+        </p>
+    </div>
+
+    <div class="details-card">
+
+        <!-- ПРЕВОЗ -->
+        <div class="details-section">
+            <h4 class="details-title">Информация за превоза</h4>
+            <dl class="details-list">
+                <div>
+                    <dt>Влак</dt>
+                    <dd>@Model.Train.Name</dd>
+                </div>
+                <div>
+                    <dt>Цена</dt>
+                    <dd class="price"> @Model.Price.ToString("F2") €</dd>
+                </div>
+                <div>
+                    <dt>Начална гара</dt>
+                    <dd>@Model.StartStation.Name</dd>
+                </div>
+                <div>
+                    <dt>Крайна гара</dt>
+                    <dd>@Model.EndStation.Name</dd>
+                </div>
+                <div>
+                    <dt>Отпътуване</dt>
+                    <dd>@Model.DepartureTime.ToString("dd.MM.yyyy г. HH:mm")</dd>
+                </div>
+                <div>
+                    <dt>Пристигане</dt>
+                    <dd>@Model.ArrivalTime.ToString("dd.MM.yyyy г. HH:mm")</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="tickets-section mt-5">
+
+            <h3 class="page-title">Закупени билети</h3>
+
+            @if (!Model.Tickets.Any())
+            {
+                <div class="empty-state">
+                    Няма закупени билети за този превоз.
+                </div>
+            }
+            else
+            {
+                <div class="custom-table-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Потребител</th>
+                                <th>Име</th>
+                                <th>Телефон</th>
+                                <th>Брой</th>
+                                <th>Дата на покупка</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ticket in Model.Tickets)
+                            {
+                                <tr>
+                                    <td>@ticket.User.Email</td>
+                                    <td>
+                                        @ticket.User.FirstName
+                                        @ticket.User.MiddleName
+                                        @ticket.User.LastName
+                                    </td>
+                                    <td>@ticket.User.PhoneNumber</td>
+                                    <td>@ticket.Quantity</td>
+                                    <td>@ticket.PurchaseDate.ToString("dd.MM.yyyy г. HH:mm")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="actions mt-3 justify-content-end">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="action-btn details">
+            Редактирай
+        </a>
+        <a asp-action="Index" class="action-btn edit">
+            Обратно
+        </a>
+    </div>
+
+</div>

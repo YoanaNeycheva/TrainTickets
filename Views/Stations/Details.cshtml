@@ -1,0 +1,34 @@
+﻿@model TrainTickets.Models.Station
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/details.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+    <h1 class="page-title mb-2">Детайли за ЖП гарата</h1>
+    <p class="page-subtitle">@Model.Name</p>
+    <div class="details-card">
+        <h4 class="details-title">Информация за гарата</h4>
+        <dl class="details-list">
+            <div>
+                <dt>Име</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </div>
+            <div>
+                <dt>Град</dt>
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+            </div>
+        </dl>
+    </div>
+    <div class="container w-75 mt-3 p-0 actions">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" 
+        class="action-btn details">Редактирай</a>
+        <a asp-action="Index" class="action-btn edit">Обратно към списъка</a>
+    </div>
+</div>

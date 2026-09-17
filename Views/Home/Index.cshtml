@@ -1,0 +1,140 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+}
+
+<div class="hero fade-in">
+    <div class="hero-overlay">
+
+        <img src="~/images/bdz-logo.png" alt="БДЖ Лого" 
+        class="hero-logo" />
+        <h1>Купи билет за влак онлайн</h1>
+        <p>Бързо • Удобно • Сигурно</p>
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a asp-controller="Tickets" asp-action="Index" class="btn btn-primary">
+                Купи билети
+            </a>
+        }
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-primary">
+                Купи билети
+            </a>
+        }
+
+    </div>
+</div>
+
+<section class="trains-section fade-in">
+    <div class="container">
+        <h2>Нашите влакове</h2>
+
+        <div class="train-cards">
+
+            <div class="train-card">
+                <img src="~/images/fast-train.png" alt="Бърз влак" />
+                <h3>Експресни влакове</h3>
+                <p>Пътувайте бързо и удобно между големите градове.</p>
+            </div>
+
+            <div class="train-card">
+                <img src="~/images/standard-train.jpg" alt="Стандартен влак" />
+                <h3>Регионални линии</h3>
+                <p>Свързваме малките населени места с големите центрове.</p>
+            </div>
+
+            <div class="train-card">
+                <img src="~/images/night-train.jpg" alt="Нощни вагони" />
+                <h3>Нощни вагони</h3>
+                <p>Пътувайте комфортно през нощта в спални купета във всеки влак.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="about-section">
+    <div class="container about-content">
+
+        <div class="about-text">
+            <h2>За нашата компания</h2>
+            <p>
+                Ние предлагаме модерни и удобни железопътни услуги,
+                осигурявайки сигурност, комфорт и точност. С над 20 години 
+                опит в транспорта, ние свързваме
+                хората и градовете по най-надеждния начин.
+            </p>
+            <p>
+                Този сайт е създаден с цел да улесни процеса на закупуване на билети за 
+                влак онлайн, предоставяйки бърз и удобен начин за планиране на вашите
+                пътувания. Сайта не позволява онлайн разплащане, а само резервиране на билети.
+                Реалното им закупуване става на гишетата
+                във всяко населено място с жп гара.
+            </p>
+        </div>
+
+        <div class="about-image">
+            <img src="~/images/company.jpg" alt="Компания" />
+        </div>
+
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <h2>Защо да изберете нас?</h2>
+
+        <div class="features-grid">
+            <div class="feature">
+                <h3>Сигурност</h3>
+                <p>Модерни системи за безопасност и контрол.</p>
+            </div>
+
+            <div class="feature">
+                <h3>Комфорт</h3>
+                <p>Удобни седалки и климатизирани вагони.</p>
+            </div>
+
+            <div class="feature">
+                <h3>Онлайн резервация</h3>
+                <p>Закупуване на билети за секунди.</p>
+            </div>
+
+            <div class="feature">
+                <h3>Поддръжка 24/7</h3>
+                <p>Нашият екип е винаги на разположение.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="punctuality-section">
+    <div class="container punctuality-content">
+
+        <div class="punctuality-image">
+            <img src="~/images/clock.jpg" alt="Часовник на гара" />
+        </div>
+
+        <div class="punctuality-text">
+            <h2>Винаги навреме</h2>
+            <p>
+                Нашите влакове се движат с над 98% точност.
+                Без закъснения. Без излишно чакане.
+            </p>
+            <p>
+                Разчитаме на модерна инфраструктура и професионален екип,
+                за да гарантираме вашето спокойно пътуване без неприятни изненади.
+                Ние ценим вашето време и се стремим да го уважаваме във всяко пътуване.
+                Поемаме пълна отговорност при всяко закъснение и работим усилено, за да 
+                минимизираме всякакви неудобства.
+            </p>
+        </div>
+
+    </div>
+</section>

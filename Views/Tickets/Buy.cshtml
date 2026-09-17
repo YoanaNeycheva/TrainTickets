@@ -1,0 +1,97 @@
+﻿@model TrainTickets.Models.Ticket
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/tickets-buy.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+
+    <h1 class="text-center page-title">Закупуване на билети</h1>
+
+    <div class="buy-card">
+
+        <!-- TRIP INFO -->
+        <div class="trip-info">
+            <div class="route">
+                @Model.Trip.StartStation.Name → @Model.Trip.EndStation.Name
+            </div>
+
+            <div class="times">
+                <span>
+                    <strong>Отпътуване:</strong>
+                    @Model.Trip.DepartureTime
+                </span>
+                <span>
+                    <strong>Пристигане:</strong>
+                    @Model.Trip.ArrivalTime
+                </span>
+            </div>
+        </div>
+
+        <form asp-action="Buy" method="post" class="buy-form">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="TripId" />
+
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Quantity">Брой билети</label>
+                <input asp-for="Quantity"
+                       class="form-control"
+                       min="1"
+                       max="10"
+                       id="quantityInput" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="price-row">
+                <div>
+                    <label>Цена на билет</label>
+                    <input class="form-control"
+                           id="pricePerTicket"
+                           value="@Model.Trip.Price.ToString("0.00") €"
+                           readonly />
+                </div>
+
+                <div>
+                    <label>Крайна цена</label>
+                    <input class="form-control total-price"
+                           id="totalPrice"
+                           value="@Model.TotalPrice.ToString("0.00") €"
+                           readonly />
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="btn btn-primary">
+                    Потвърди покупката
+                </button>
+
+                <a asp-controller="Tickets"
+                   asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    Назад
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script>
+        const quantityInput = document.getElementById("quantityInput");
+        const pricePerTicket = document.getElementById("pricePerTicket");
+        const totalPrice = document.getElementById("totalPrice");
+
+        function updateTotalPrice() {
+            const quantity = parseInt(quantityInput.value) || 0;
+            const price = parseFloat(pricePerTicket.value) || 0;
+            totalPrice.value = (quantity * price).toFixed(2) + " €";
+        }
+
+        quantityInput.addEventListener("input", updateTotalPrice);
+    </script>
+}

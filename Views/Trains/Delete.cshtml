@@ -1,0 +1,55 @@
+﻿@model TrainTickets.Models.Train
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/delete.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+}
+
+<div class="page-container fade-in">
+
+    <h1 class="page-title text-center mb-4">Изтриване</h1>
+
+    <div class="delete-card">
+
+        <h5 class="delete-warning">
+            ⚠️ Сигурни ли сте, че искате да изтриете този влак?
+            Това действие е необратимо.
+        </h5>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary()
+            </div>
+        }
+
+        <div class="delete-details">
+
+            <div class="detail-row">
+                <span class="label">Име</span>
+                <span class="value">@Html.DisplayFor(model => model.Name)</span>
+            </div>
+
+            <div class="detail-row">
+                <span class="label">Тип</span>
+                <span class="value">@Html.DisplayFor(model => model.Type)</span>
+            </div>
+            <div class="detail-row">
+                <span class="label">Брой места</span>
+                <span class="value">@Html.DisplayFor(model => model.Capacity)</span>
+            </div>
+        </div>
+
+        <form asp-action="Delete" class="delete-actions">
+            <input type="hidden" asp-for="Id" />
+
+            <a asp-action="Index" class="btn-secondary">
+                ← Обратно
+            </a>
+
+            <button type="submit" class="btn-danger">
+                Изтрий
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@using TrainTickets.Enums
+@using TrainTickets.Models.ViewModels
+@model List<UserRolesViewModel>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/animations.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+}
+<div class="page-container fade-in">
+
+    <h1 class="page-title">Потребители</h1>
+    <p class="page-subtitle">Списък на всички потребители и подробна информация за тях</p>
+
+    <div class="custom-table-wrapper">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Собствено име</th>
+                    <th>Бащино име</th>
+                    <th>Фамилия</th>
+                    <th>Телефонен номер</th>
+                    <th>Имейл</th>
+                    <th>Потребителско име</th>
+                    <th>Роля</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UserRolesViewModel userRolesViewModel in Model)
+                {
+                    <tr>
+                        <td>@userRolesViewModel.FirstName</td>
+                        <td>@userRolesViewModel.MiddleName</td>
+                        <td>@userRolesViewModel.LastName</td>
+                        <td>@userRolesViewModel.PhoneNumber</td>
+                        <td>@userRolesViewModel.Email</td>
+                        <td>@userRolesViewModel.Username</td>
+                        <td>@userRolesViewModel.Roles.Last().GetRoleDisplayName()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

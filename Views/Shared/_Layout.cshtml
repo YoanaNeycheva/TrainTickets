@@ -1,0 +1,180 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var currentRazorPage = ViewContext.RouteData.Values["page"]?.ToString(); // За Identity страниците
+}
+
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] БДЖ Онлайн</title>
+    <script type="importmap"></script>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico"  />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TrainTickets.styles.css" asp-append-version="true" />
+</head>
+<body class="app-body">
+
+    <header class="app-header">
+        <div class="app-header-inner">
+            <!-- LEFT -->
+            <a class="app-logo">
+                <img src="~/images/bdz-logo.png" alt="БДЖ" class="nav-logo" />
+            </a>
+            <p class="app-logo">БДЖ Онлайн</p>
+
+            <!-- CENTER -->
+            <nav class="app-nav">
+                <a asp-controller="Home" asp-action="Index" 
+                class="@(currentController == "Home" ? "active" : "")">Начало</a>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Tickets" asp-action="Index"
+                       class="@(currentController == "Tickets"
+                           && (currentAction == "Index" || currentAction == "Buy") ? "active" : "")">
+                       Билети
+                   </a>
+                    <a asp-controller="Tickets" asp-action="MyTickets"
+                       class="@(currentController == "Tickets"
+                           && (currentAction == "MyTickets" || currentAction == "Details") ? "active" : "")">
+                       Моите билети
+                   </a>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="Trips" asp-action="Index"
+                           class="@(currentController == "Trips" ? "active" : "")">Превози</a>
+                        <a asp-controller="Trains" asp-action="Index"
+                           class="@(currentController == "Trains" ? "active" : "")">Влакове</a>
+                        <a asp-controller="Stations" asp-action="Index"
+                           class="@(currentController == "Stations" ? "active" : "")">ЖП Гари</a>
+                        <a asp-controller="UserRoles" asp-action="Index"
+                           class="@(currentController == "UserRoles" ? "active" : "")">Потребители</a>
+                    }
+                }
+            </nav>
+
+            <!-- RIGHT -->
+            <div class="app-auth">
+                <ul class="app-nav-list">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li>
+                            <a class="app-nav-link @(currentRazorPage == "/Account/Manage/Index" ? "active" : "")"
+                               asp-area="Identity"
+                               asp-page="/Account/Manage/Index">
+                                Настройки
+                            </a>
+                        </li>
+
+                        <li>
+                            <form asp-area="Identity"
+                                  asp-page="/Account/Logout"
+                                  asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="app-nav-link @(currentRazorPage == "/Account/Logout" ? "active" : "")">
+                                    Изход
+                                </button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a class="app-nav-link @(currentRazorPage == "/Account/Register" ? "active" : "")"
+                               asp-area="Identity"
+                               asp-page="/Account/Register">
+                                Регистрация
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="app-nav-link @(currentRazorPage == "/Account/Login" ? "active" : "")"
+                               asp-area="Identity"
+                               asp-page="/Account/Login">
+                                Вход
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </header>
+
+
+    <main class="app-main">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="app-footer">
+
+        <div class="footer-container">
+
+            <!-- Company -->
+            <div class="footer-column">
+                <h3>БДЖ Онлайн</h3>
+                <p>
+                    @* Модерен и сигурен начин за онлайн закупуване
+                    на билети за влак в цялата страна. *@ За повече информация можете да посетите и гишетата ни.
+                    Сайта позволява само резервиране на билети, а реалното им закупуване става на гишетата
+                    във всяко населено място с жп гара. Благодарим Ви, че избрахте БДЖ Онлайн!
+                </p>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-column">
+                <h3>Контакти</h3>
+                <ul>
+                    <li>📍 Велико Търново, България</li>
+                    <li>📞 +359 888 123 456</li>
+                    <li>✉ bdj_support@gmail.bg</li>
+                </ul>
+            </div>
+
+            <!-- Social -->
+            <div class="footer-column">
+                <h3>Последвайте ни</h3>
+
+                <div class="social-modern">
+
+                    <div class="social-item">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>@@bdj_online.bg</span>
+                    </div>
+
+                    <div class="social-item">
+                        <i class="fab fa-instagram"></i>
+                        <span>@@bdj_online.bg</span>
+                    </div>
+
+                    <div class="social-item">
+                        <i class="fab fa-twitter"></i>
+                        <span>@@bdj_online.bg</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © @DateTime.Now.Year RailWay. Всички права запазени.
+        </div>
+
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Styles", required: false)
+</body>
+</html>
